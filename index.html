@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Viewer</title>
+</head>
+<body>
+    <div>
+        <img id="image" src="tu/001.png" alt="Image">
+    </div>
+    <div>
+        <button id="prevButton">Previous</button>
+        <span id="currentPage">1</span>
+        <button id="nextButton">Next</button>
+    </div>
+    <div>
+        <input type="number" id="pageInput" min="1" max="4">
+        <button id="goToButton">Go To Page</button>
+    </div>
+    <div>
+        <a href="/">Return to Homepage</a>
+    </div>
+
+    <script>
+        const image = document.getElementById('image');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPage = document.getElementById('currentPage');
+        const pageInput = document.getElementById('pageInput');
+        const goToButton = document.getElementById('goToButton');
+
+        let currentPageNum = 1;
+
+        // Update image source
+        function updateImage() {
+            image.src = `tu/${currentPageNum.toString().padStart(3, '0')}.png`;
+            currentPage.textContent = currentPageNum;
+        }
+
+        // Event listener for Previous button
+        prevButton.addEventListener('click', () => {
+            if (currentPageNum > 1) {
+                currentPageNum--;
+                updateImage();
+            }
+        });
+
+        // Event listener for Next button
+        nextButton.addEventListener('click', () => {
+            if (currentPageNum < 4) {
+                currentPageNum++;
+                updateImage();
+            }
+        });
+
+        // Event listener for Go To Page button
+        goToButton.addEventListener('click', () => {
+            const pageNumber = parseInt(pageInput.value);
+            if (pageNumber >= 1 && pageNumber <= 4) {
+                currentPageNum = pageNumber;
+                updateImage();
+            }
+        });
+
+        // Initial load
+        updateImage();
+    </script>
+</body>
+</html>
