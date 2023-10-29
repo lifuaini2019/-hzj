@@ -1,28 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>化州志 1900年7编</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>化州志 1900年8编</title>
+    <style>
+        #container {
+            display: flex;
+        }
+
+        #directory-list {
+            float: left;
+            width: 200px;
+        }
+
+        #directory-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #directory-list ul li {
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        #image-container {
+            text-align: center;
+        }
+
+        #image-container img {
+            max-width: 100%;
+        }
+
+        #pagination {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #prev-button, #next-button {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+
+        #page-number {
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        #description {
+            position: absolute;
+            top: 10px;
+            left: 230px;
+        }
+    </style>
 </head>
 <body>
     <div id="description">
         <h2>本名：化州志 1900年编</h2>
     </div>
-
-<div id="image-container">
-            <p id="image-title"></p>
-            <img id="current-image" src="tu/thumbnails/001.png">
-        </div>
-        <div id="pagination">
-            <button id="prev-button" onclick="goToPrevPage()">上一页</button>
-            <button id="next-button" onclick="goToNextPage()">下一页</button>
-            <input type="text" id="page-number" placeholder="跳至页码">
-            <button id="go-button" onclick="goToPageInput()">跳至</button>
-        </div>
-    </div>
-
-
-    
     <div id="container">
         <div id="directory-list">
             <ul>
@@ -32,7 +66,17 @@
                 <!-- 添加其他目录项 -->
             </ul>
         </div>
-        
+        <div id="image-container">
+            <p id="image-title"></p>
+            <img id="current-image" src="tu/thumbnails/001.png">
+        </div>
+    </div>
+    <div id="pagination">
+        <button id="prev-button" onclick="goToPrevPage()">上一页</button>
+        <button id="next-button" onclick="goToNextPage()">下一页</button>
+        <input type="text" id="page-number" placeholder="跳至页码">
+        <button id="go-button" onclick="goToPageInput()">跳至</button>
+    </div>
 
     <script>
         const images = [
