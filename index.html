@@ -1,17 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>图片浏览器</title>
+    <title>图片浏览器 - 化州志 1900年编</title>
+    <style>
+        #image-container {
+            text-align: center;
+        }
+
+        #image-container img {
+            max-width: 100%;
+        }
+
+        #pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #prev-button, #next-button {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+
+        #directory-list {
+            float: left;
+            width: 200px;
+        }
+
+        #directory-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #directory-list ul li {
+            margin: 5px 0;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <h2>本名：化州志 1900年编</h2>
+    <div id="directory-list">
+        <ul>
+            <li onclick="goToPage(1)">第一课 (001.png)</li>
+            <li onclick="goToPage(8)">第二课 (008.png)</li>
+            <li onclick="goToPage(15)">第三课 (015.png)</li>
+            <!-- 添加其他目录项 -->
+        </ul>
+    </div>
     <div id="image-container">
+        <p id="image-title"></p>
         <img id="current-image" src="tu/001.png">
     </div>
     <div id="pagination">
-        <button id="prev-button">上一页</button>
-        <button id="next-button">下一页</button>
+        <button id="prev-button" onclick="goToPrevPage()">上一页</button>
+        <button id="next-button" onclick="goToNextPage()">下一页</button>
         <input type="text" id="page-number" placeholder="跳至页码">
-        <button id="go-button">跳至</button>
+        <button id="go-button" onclick="goToPageInput()">跳至</button>
     </div>
 
     <script>
@@ -25,35 +69,49 @@
 
         let currentImageIndex = 0;
         const currentImage = document.getElementById("current-image");
+        const imageTitle = document.getElementById("image-title");
         const prevButton = document.getElementById("prev-button");
         const nextButton = document.getElementById("next-button");
         const pageNumberInput = document.getElementById("page-number");
-        const goButton = document.getElementById("go-button");
 
         function updateImage() {
             currentImage.src = "tu/" + images[currentImageIndex];
+            imageTitle.textContent = `第${currentImageIndex + 1}课 (${images[currentImageIndex]})`;
         }
 
-        prevButton.addEventListener("click", () => {
+        function goToPrevPage() {
             if (currentImageIndex > 0) {
                 currentImageIndex--;
                 updateImage();
             }
-        });
+        }
 
-        nextButton.addEventListener("click", () => {
+        function goToNextPage() {
             if (currentImageIndex < images.length - 1) {
                 currentImageIndex++;
                 updateImage();
             }
-        });
+        }
 
-        goButton.addEventListener("click", () => {
+        function goToPage(page) {
+            if (page >= 1 && page <= images.length) {
+                currentImageIndex = page - 1;
+                updateImage();
+            }
+        }
+
+        function goToPageInput() {
             const pageNumber = parseInt(pageNumberInput.value, 10);
             if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= images.length) {
                 currentImageIndex = pageNumber - 1;
                 updateImage();
             }
+        }
+
+        // 预加载所有图片
+        images.forEach((image, index) => {
+            const img = new Image();
+            img.src = "tu/" + image;
         });
 
         updateImage();
