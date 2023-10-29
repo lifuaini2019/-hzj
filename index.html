@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>图片浏览器 - 化州志 1900年4编</title>
+    <title>图片浏览器 - 化州志 1900年5编</title>
     <style>
         #container {
             display: flex;
-            align-items: flex-start;
-        }
-
-        #image-container {
-            text-align: center;
-        }
-
-        #image-container img {
-            max-width: 100%;
         }
 
         #directory-list {
@@ -31,6 +22,14 @@
             cursor: pointer;
         }
 
+        #image-container {
+            text-align: center;
+        }
+
+        #image-container img {
+            max-width: 100%;
+        }
+
         #pagination {
             position: absolute;
             top: 10px;
@@ -46,10 +45,18 @@
             font-size: 16px;
             padding: 5px;
         }
+
+        #description {
+            position: absolute;
+            top: 10px;
+            left: 230px;
+        }
     </style>
 </head>
 <body>
-    <h2>本名：化州志 1900年编</h2>
+    <div id="description">
+        <h2>本名：化州志 1900年编</h2>
+    </div>
     <div id="container">
         <div id="directory-list">
             <ul>
