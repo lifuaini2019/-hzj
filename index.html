@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>图片浏览器 - 化州志 1900年编</title>
+    <title>图片浏览器 - 化州志 1900年4编</title>
     <style>
         #container {
             display: flex;
+            align-items: flex-start;
         }
 
         #image-container {
@@ -13,17 +14,6 @@
 
         #image-container img {
             max-width: 100%;
-        }
-
-        #pagination {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-
-        #prev-button, #next-button {
-            font-size: 16px;
-            padding: 10px 20px;
         }
 
         #directory-list {
@@ -40,10 +30,26 @@
             margin: 5px 0;
             cursor: pointer;
         }
+
+        #pagination {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #prev-button, #next-button {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+
+        #page-number {
+            font-size: 16px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
-    <h2>本名：化州志 1900年3编</h2>
+    <h2>本名：化州志 1900年编</h2>
     <div id="container">
         <div id="directory-list">
             <ul>
@@ -57,12 +63,12 @@
             <p id="image-title"></p>
             <img id="current-image" src="tu/thumbnails/001.png">
         </div>
-    </div>
-    <div id="pagination">
-        <button id="prev-button" onclick="goToPrevPage()">上一页</button>
-        <button id="next-button" onclick="goToNextPage()">下一页</button>
-        <input type="text" id="page-number" placeholder="跳至页码">
-        <button id="go-button" onclick="goToPageInput()">跳至</button>
+        <div id="pagination">
+            <button id="prev-button" onclick="goToPrevPage()">上一页</button>
+            <button id="next-button" onclick="goToNextPage()">下一页</button>
+            <input type="text" id="page-number" placeholder="跳至页码">
+            <button id="go-button" onclick="goToPageInput()">跳至</button>
+        </div>
     </div>
 
     <script>
@@ -77,6 +83,7 @@
         let currentImageIndex = 0;
         const currentImage = document.getElementById("current-image");
         const imageTitle = document.getElementById("image-title");
+        const pageNumberInput = document.getElementById("page-number");
 
         function updateImage() {
             currentImage.src = "tu/" + images[currentImageIndex];
