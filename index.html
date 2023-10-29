@@ -43,7 +43,7 @@
     </style>
 </head>
 <body>
-    <h2>本名：化州志 1900年编</h2>
+    <h2>本名：化州志 1900年3编</h2>
     <div id="container">
         <div id="directory-list">
             <ul>
@@ -100,6 +100,14 @@
         function goToPage(page) {
             if (page >= 1 && page <= images.length) {
                 currentImageIndex = page - 1;
+                updateImage();
+            }
+        }
+
+        function goToPageInput() {
+            const pageNumber = parseInt(pageNumberInput.value, 10);
+            if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= images.length) {
+                currentImageIndex = pageNumber - 1;
                 updateImage();
             }
         }
