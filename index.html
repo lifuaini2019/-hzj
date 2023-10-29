@@ -71,7 +71,7 @@
         </div>
         <div id="image-container">
             <p id="image-title"></p>
-            <img id="current-image" src="master/thumbnails/001.png">
+            <img id="current-image" src="blob/master/thumbnails/001.png">
         </div>
     </div>
     <div id="pagination">
@@ -108,7 +108,7 @@
         const pageNumberInput = document.getElementById("page-number");
 
         function updateImage() {
-            currentImage.src = "master/" + images[currentImageIndex];
+            currentImage.src = "blob/master/" + images[currentImageIndex];
             imageTitle.textContent = `第${currentImageIndex + 1}页 (${images[currentImageIndex]})`;
         }
 
