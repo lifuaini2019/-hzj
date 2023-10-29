@@ -1,0 +1,48 @@
+#container {
+    display: flex;
+}
+
+#directory-list {
+    float: left;
+    width: 200px;
+}
+
+#directory-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#directory-list ul li {
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+#image-container {
+    text-align: center;
+}
+
+#image-container img {
+    max-width: 100%;
+}
+
+#pagination {
+    position: absolute;
+    top: 10px;
+    left: 230px;
+}
+
+#prev-button, #next-button {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+#page-number {
+    font-size: 16px;
+    padding: 5px;
+}
+
+#description {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
