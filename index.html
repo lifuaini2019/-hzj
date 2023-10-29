@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>化州志 1900年8编</title>
+    <title>图片浏览器 - 化州志 1900年9编</title>
     <style>
         #container {
             display: flex;
@@ -30,26 +30,27 @@
             max-width: 100%;
         }
 
-        #pagination {
+        #description {
             position: absolute;
             top: 10px;
+            left: 230px;
+        }
+
+        #pagination {
+            position: absolute;
+            bottom: 10px;
             left: 10px;
         }
 
-        #prev-button, #next-button {
+        #prev-button, #next-button, #zoom-in, #zoom-out {
             font-size: 16px;
             padding: 10px 20px;
+            margin-right: 10px;
         }
 
         #page-number {
             font-size: 16px;
             padding: 5px;
-        }
-
-        #description {
-            position: absolute;
-            top: 10px;
-            left: 230px;
         }
     </style>
 </head>
@@ -74,6 +75,8 @@
     <div id="pagination">
         <button id="prev-button" onclick="goToPrevPage()">上一页</button>
         <button id="next-button" onclick="goToNextPage()">下一页</button>
+        <button id="zoom-in" onclick="zoomInImage()">放大</button>
+        <button id="zoom-out" onclick="zoomOutImage()">缩小</button>
         <input type="text" id="page-number" placeholder="跳至页码">
         <button id="go-button" onclick="goToPageInput()">跳至</button>
     </div>
@@ -124,6 +127,14 @@
                 currentImageIndex = pageNumber - 1;
                 updateImage();
             }
+        }
+
+        function zoomInImage() {
+            // 添加放大图片的逻辑
+        }
+
+        function zoomOutImage() {
+            // 添加缩小图片的逻辑
         }
 
         updateImage();
