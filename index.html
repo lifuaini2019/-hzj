@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> - 化州志 1900年10编</title>
+    <title> - 化州志 1900年11编</title>
     <style>
         #container {
             display: flex;
@@ -63,9 +63,9 @@
     <div id="container">
         <div id="directory-list">
             <ul>
-                <li onclick="goToPage(1)">第一课 (001.png)</li>
-                <li onclick="goToPage(8)">第二课 (008.png)</li>
-                <li onclick="goToPage(15)">第三课 (015.png)</li>
+                <li onclick="goToPage(1)">第一课 </li>
+                <li onclick="goToPage(8)">第二课</li>
+                <li onclick="goToPage(15)">第三课</li>
                 <!-- 添加其他目录项 -->
             </ul>
         </div>
@@ -85,10 +85,16 @@
 
     <script>
         const images = [
-            "001.png",
-            "002.png",
-            "003.png",
-            "004.png",
+            "master/001.png",
+            "master/002.png",
+            "master/003.png",
+            "master/004.png",
+            "master/005.png",
+            "master/006.png",
+            "master/007.png",
+            "master/008.png",
+            "master/009.png",
+            "master/010.png",
             // 添加其他图片的文件名
         ];
 
@@ -99,7 +105,7 @@
 
         function updateImage() {
             currentImage.src = "tu/" + images[currentImageIndex];
-            imageTitle.textContent = `第${currentImageIndex + 1}课 (${images[currentImageIndex]})`;
+            imageTitle.textContent = `第${currentImageIndex + 1}页 (${images[currentImageIndex]})`;
         }
 
         function goToPrevPage() {
