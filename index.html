@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> - 化州志 1900年11编</title>
+    <title>图片浏览器 - 化州志 1900年12编</title>
     <style>
         #container {
             display: flex;
@@ -63,15 +63,15 @@
     <div id="container">
         <div id="directory-list">
             <ul>
-                <li onclick="goToPage(1)">第一课 </li>
-                <li onclick="goToPage(8)">第二课</li>
-                <li onclick="goToPage(15)">第三课</li>
+                <li onclick="goToPage(1)">第一课 (001.png)</li>
+                <li onclick="goToPage(8)">第二课 (008.png)</li>
+                <li onclick="goToPage(15)">第三课 (015.png)</li>
                 <!-- 添加其他目录项 -->
             </ul>
         </div>
         <div id="image-container">
             <p id="image-title"></p>
-            <img id="current-image" src="tu/thumbnails/001.png">
+            <img id="current-image" src="master/thumbnails/001.png">
         </div>
     </div>
     <div id="pagination">
@@ -85,16 +85,20 @@
 
     <script>
         const images = [
-            "master/001.png",
-            "master/002.png",
-            "master/003.png",
-            "master/004.png",
-            "master/005.png",
-            "master/006.png",
-            "master/007.png",
-            "master/008.png",
-            "master/009.png",
-            "master/010.png",
+            "001.png",
+            "002.png",
+            "003.png",
+            "004.png",
+            "005.png",
+            "006.png",
+            "007.png",
+            "008.png",
+            "009.png",
+            "010.png",
+            "011.png",
+            "012.png",
+            "013.png",
+            "014.png",
             // 添加其他图片的文件名
         ];
 
@@ -104,7 +108,7 @@
         const pageNumberInput = document.getElementById("page-number");
 
         function updateImage() {
-            currentImage.src = "tu/" + images[currentImageIndex];
+            currentImage.src = "master/" + images[currentImageIndex];
             imageTitle.textContent = `第${currentImageIndex + 1}页 (${images[currentImageIndex]})`;
         }
 
