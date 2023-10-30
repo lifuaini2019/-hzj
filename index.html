@@ -8,41 +8,50 @@
             text-align: center;
             background-color: #f0f0f0;
         }
+
         #announcement {
             background-color: #333;
             color: #fff;
             padding: 10px;
         }
+
         #container {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
         }
-        #directory {
+
+        #directory-list {
             flex: 1;
             max-width: 200px;
             background-color: #eee;
             padding: 10px;
+            cursor: pointer;
         }
-        #image {
+
+        #image-container {
             flex: 2;
             background-color: #fff;
             padding: 10px;
+            text-align: center;
         }
-        #image img {
+
+        #image-container img {
             max-width: 100%;
             height: auto;
         }
+
         #controls {
             clear: both;
             padding: 10px;
         }
+
         #pageControls {
             float: left;
         }
+
         #zoomControls {
             float: right;
         }
+
         button {
             background-color: #007acc;
             color: #fff;
@@ -55,84 +64,116 @@
 </head>
 <body>
     <div id="announcement">
-        <h1>公告内容！！！</h1>
+        <h1>网站公告内容！！！</h1>
     </div>
+
     <div id="container">
-        <div id="directory">
-            <h2>目录章节</h2>
+        <div id="directory-list">
             <ul>
-                <li><a href="#" onclick="loadImage('001.png')">第一章节 (001.png)</a></li>
-                <li><a href="#" onclick="loadImage('008.png')">第二章节 (008.png)</a></li>
-                <li><a href="#" onclick="loadImage('015.png')">第三章节 (015.png)</a></li>
-                <!-- 添加更多目录项 -->
+                <li onclick="goToPage(1)">前言</li>
+                <li onclick="goToPage(8)">第一章</li>
+                <li onclick="goToPage(15)">第二章</li>
+                <li onclick="goToPage(21)">第三章</li>
+                <!-- 添加其他目录项 -->
             </ul>
         </div>
-        <div id="image">
-            <h2>图片</h2>
-            <img id="displayedImage" src="tu/thumbnails/001.png" alt="Image">
+
+        <div id="image-container">
+            <p id="page-number">(第？页)</p>
+            <img id="current-image" src="tu/thumbnails/001.png">
         </div>
     </div>
+
     <div id="controls">
-        <div id="pageControls">
-            <button onclick="loadPrevImage()">上一页</button>
-            <button onclick="loadNextImage()">下一页</button>
-            <input type="text" id="pageNumber" placeholder="跳至页码">
-            <button onclick="goToPage()">跳至</button>
+        <div id="pageControls" class="control-group">
+            <button id="prev-button" onclick="goToPrevPage()">上一页</button>
+            <input type="text" id="page-number-input" placeholder="跳至页码" onkeypress="jumpToPage(event)">
+            <button id="next-button" onclick="goToNextPage()">下一页</button>
+            <button id="go-button" onclick="jumpToPageButton()">跳至</button>
         </div>
-        <div id="zoomControls">
-            <button onclick="zoomIn()">放大</button>
-            <button onclick="zoomOut()">缩小</button>
+        <div id="zoomControls" class="control-group">
+            <button id="zoom-in" onclick="zoomInImage()">放大</button>
+            <button id="zoom-out" onclick="zoomOutImage()">缩小</button>
         </div>
     </div>
 
     <script>
-        const images = [
-            "001.png",
-            "008.png",
-            "015.png",
-            // 添加更多图片文件名
+        const chapters = [
+            { startPage: 1, endPage: 7 }, // 前言
+            { startPage: 8, endPage: 14 }, // 第一章
+            { startPage: 15, endPage: 20 }, // 第二章
+            { startPage: 21, endPage: 238 }, // 第三章
+            // 添加其他章节的页数范围
         ];
 
-        let currentIndex = 0;
-        const displayedImage = document.getElementById("displayedImage");
-        const pageNumber = document.getElementById("pageNumber");
+        let currentChapter = 1;
+        let currentPage = chapters[currentChapter - 1].startPage;
+        const currentImage = document.getElementById("current-image");
+        const pageText = document.getElementById("page-number");
 
-        function loadImage(imageName) {
-            displayedImage.src = "tu/" + imageName;
+        function updateImage() {
+            const chapter = chapters[currentChapter - 1];
+            const imageName = ('00' + currentPage).slice(-3) + '.png';
+            currentImage.src = 'tu/' + imageName;
+            pageText.textContent = `(第${currentPage}页)`;
         }
 
-        function loadPrevImage() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                loadImage(images[currentIndex]);
+        function goToPrevPage() {
+            if (currentPage > chapters[currentChapter - 1].startPage) {
+                currentPage--;
+                updateImage();
+            } else if (currentChapter > 1) {
+                goToChapter(currentChapter - 1);
             }
         }
 
-        function loadNextImage() {
-            if (currentIndex < images.length - 1) {
-                currentIndex++;
-                loadImage(images[currentIndex]);
+        function goToNextPage() {
+            if (currentPage < chapters[currentChapter - 1].endPage) {
+                currentPage++;
+                updateImage();
+            } else if (currentChapter < chapters.length) {
+                goToChapter(currentChapter + 1);
             }
         }
 
-        function goToPage() {
-            const page = parseInt(pageNumber.value);
-            if (!isNaN(page) && page >= 1 && page <= images.length) {
-                currentIndex = page - 1;
-                loadImage(images[currentIndex]);
+        function goToPage(page) {
+            if (page >= 1 && page <= chapters[chapters.length - 1].endPage) {
+                currentPage = page;
+                updateImage();
             }
         }
 
-        function zoomIn() {
-            // 实现图片放大功能
+        function jumpToPageButton() {
+            const pageNumber = parseInt(document.getElementById("page-number-input").value);
+            if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= chapters[chapters.length - 1].endPage) {
+                currentPage = pageNumber;
+                updateImage();
+            }
         }
 
-        function zoomOut() {
-            // 实现图片缩小功能
+        function jumpToPage(event) {
+            if (event.key === "Enter") {
+                jumpToPageButton();
+            }
         }
 
-        // 初始加载第一张图片
-        loadImage(images[currentIndex]);
+        function zoomInImage() {
+            const currentWidth = currentImage.clientWidth;
+            currentImage.style.width = (currentWidth * 1.2) + "px";
+        }
+
+        function zoomOutImage() {
+            const currentWidth = currentImage.clientWidth;
+            currentImage.style.width = (currentWidth / 1.2) + "px";
+        }
+
+        function goToChapter(chapter) {
+            currentChapter = chapter;
+            currentPage = chapters[chapter - 1].startPage;
+            updateImage();
+        }
+
+        updateImage();
     </script>
 </body>
 </html>
